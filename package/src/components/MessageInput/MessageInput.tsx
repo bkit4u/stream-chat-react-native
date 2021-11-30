@@ -114,7 +114,7 @@ type MessageInputPropsWithContext<
   Me extends UnknownType = DefaultMessageType,
   Re extends UnknownType = DefaultReactionType,
   Us extends UnknownType = DefaultUserType,
-> = Pick<ChannelContextValue<At, Ch, Co, Ev, Me, Re, Us>, 'disabled' | 'members' | 'watchers'> &
+  > = Pick<ChannelContextValue<At, Ch, Co, Ev, Me, Re, Us>, 'disabled' | 'members' | 'watchers'> &
   Pick<
     MessageInputContextValue<At, Ch, Co, Ev, Me, Re, Us>,
     | 'additionalTextInputProps'
@@ -163,8 +163,8 @@ const MessageInputWithContext = <
   Me extends UnknownType = DefaultMessageType,
   Re extends UnknownType = DefaultReactionType,
   Us extends UnknownType = DefaultUserType,
->(
-  props: MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>,
+  >(
+    props: MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>,
 ) => {
   const {
     additionalTextInputProps,
@@ -447,8 +447,8 @@ const MessageInputWithContext = <
             {editing ? (
               <Edit pathFill={grey_gainsboro} />
             ) : (
-              <CurveLineLeftUp pathFill={grey_gainsboro} />
-            )}
+                <CurveLineLeftUp pathFill={grey_gainsboro} />
+              )}
             <Text style={[styles.editingBoxHeaderTitle, { color: black }, editingBoxHeaderTitle]}>
               {editing ? t('Editing Message') : t('Reply to Message')}
             </Text>
@@ -479,85 +479,85 @@ const MessageInputWithContext = <
               getUsers={getUsers}
             />
           ) : (
-            <>
-              <View style={[styles.optionsContainer, optionsContainer]}>
-                {InputButtons && <InputButtons />}
-              </View>
-              <View
-                style={[
-                  styles.inputBoxContainer,
-                  {
-                    borderColor: grey_whisper,
-                    paddingVertical: giphyActive ? 8 : 12,
-                  },
-                  inputBoxContainer,
-                ]}
-              >
-                {((typeof editing !== 'boolean' &&
-                  quotedRepliesEnabled &&
-                  editing?.quoted_message) ||
-                  quotedMessage) && (
-                  <View style={[styles.replyContainer, replyContainer]}>
-                    <Reply />
-                  </View>
-                )}
-                {imageUploads.length ? <ImageUploadPreview /> : null}
-                {imageUploads.length && fileUploads.length ? (
-                  <View
-                    style={[
-                      styles.attachmentSeparator,
-                      {
-                        borderBottomColor: grey_whisper,
-                        marginHorizontal: giphyActive ? 8 : 12,
-                      },
-                    ]}
-                  />
-                ) : null}
-                {fileUploads.length ? <FileUploadPreview /> : null}
+              <>
+                <View style={[styles.optionsContainer, optionsContainer]}>
+                  {InputButtons && <InputButtons />}
+                </View>
                 <View
                   style={[
-                    styles.autoCompleteInputContainer,
+                    styles.inputBoxContainer,
                     {
-                      paddingLeft: giphyActive ? 8 : 16,
-                      paddingRight: giphyActive ? 10 : 16,
+                      borderColor: grey_whisper,
+                      paddingVertical: giphyActive ? 8 : 12,
                     },
-                    autoCompleteInputContainer,
+                    inputBoxContainer,
                   ]}
                 >
-                  {giphyActive && (
+                  {((typeof editing !== 'boolean' &&
+                    quotedRepliesEnabled &&
+                    editing?.quoted_message) ||
+                    quotedMessage) && (
+                      <View style={[styles.replyContainer, replyContainer]}>
+                        <Reply />
+                      </View>
+                    )}
+                  {imageUploads.length ? <ImageUploadPreview /> : null}
+                  {imageUploads.length && fileUploads.length ? (
                     <View
                       style={[
-                        styles.giphyContainer,
-                        { backgroundColor: accent_blue },
-                        giphyContainer,
+                        styles.attachmentSeparator,
+                        {
+                          borderBottomColor: grey_whisper,
+                          marginHorizontal: giphyActive ? 8 : 12,
+                        },
                       ]}
-                    >
-                      <Lightning height={16} pathFill={white} width={16} />
-                      <Text style={[styles.giphyText, { color: white }, giphyText]}>GIPHY</Text>
-                    </View>
-                  )}
-                  <AutoCompleteInput<At, Ch, Co, Ev, Me, Re, Us>
-                    additionalTextInputProps={additionalTextInputProps}
-                  />
-                  {giphyActive && (
-                    <TouchableOpacity
-                      disabled={disabled}
-                      onPress={() => {
-                        setGiphyActive(false);
-                        setShowMoreOptions(true);
-                      }}
-                      testID='close-button'
-                    >
-                      <CircleClose height={20} pathFill={grey} width={20} />
-                    </TouchableOpacity>
-                  )}
+                    />
+                  ) : null}
+                  {fileUploads.length ? <FileUploadPreview /> : null}
+                  <View
+                    style={[
+                      styles.autoCompleteInputContainer,
+                      {
+                        paddingLeft: giphyActive ? 8 : 16,
+                        paddingRight: giphyActive ? 10 : 16,
+                      },
+                      autoCompleteInputContainer,
+                    ]}
+                  >
+                    {giphyActive && (
+                      <View
+                        style={[
+                          styles.giphyContainer,
+                          { backgroundColor: accent_blue },
+                          giphyContainer,
+                        ]}
+                      >
+                        <Lightning height={16} pathFill={white} width={16} />
+                        <Text style={[styles.giphyText, { color: white }, giphyText]}>GIPHY</Text>
+                      </View>
+                    )}
+                    <AutoCompleteInput<At, Ch, Co, Ev, Me, Re, Us>
+                      additionalTextInputProps={additionalTextInputProps}
+                    />
+                    {giphyActive && (
+                      <TouchableOpacity
+                        disabled={disabled}
+                        onPress={() => {
+                          setGiphyActive(false);
+                          setShowMoreOptions(true);
+                        }}
+                        testID='close-button'
+                      >
+                        <CircleClose height={20} pathFill={grey} width={20} />
+                      </TouchableOpacity>
+                    )}
+                  </View>
                 </View>
-              </View>
-              <View style={[styles.sendButtonContainer, sendButtonContainer]}>
-                <SendButton disabled={disabled || sending.current || !isValidMessage()} />
-              </View>
-            </>
-          )}
+                <View style={[styles.sendButtonContainer, sendButtonContainer]}>
+                  <SendButton disabled={disabled || sending.current || !isValidMessage()} />
+                </View>
+              </>
+            )}
         </View>
         <ShowThreadMessageInChannelButton threadList={threadList} />
       </View>
@@ -605,9 +605,9 @@ const areEqual = <
   Me extends UnknownType = DefaultMessageType,
   Re extends UnknownType = DefaultReactionType,
   Us extends UnknownType = DefaultUserType,
->(
-  prevProps: MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>,
-  nextProps: MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>,
+  >(
+    prevProps: MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>,
+    nextProps: MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>,
 ) => {
   const {
     additionalTextInputProps: prevAdditionalTextInputProps,
@@ -669,9 +669,9 @@ const areEqual = <
 
   const quotedMessageEqual =
     !!prevQuotedMessage &&
-    !!nextQuotedMessage &&
-    typeof prevQuotedMessage !== 'boolean' &&
-    typeof nextQuotedMessage !== 'boolean'
+      !!nextQuotedMessage &&
+      typeof prevQuotedMessage !== 'boolean' &&
+      typeof nextQuotedMessage !== 'boolean'
       ? prevQuotedMessage.id === nextQuotedMessage.id
       : !!prevQuotedMessage === !!nextQuotedMessage;
   if (!quotedMessageEqual) return false;
@@ -701,7 +701,7 @@ const areEqual = <
   const suggestionsEqual =
     !!prevSuggestions?.data && !!nextSuggestions?.data
       ? prevSuggestions.data.length === nextSuggestions.data.length &&
-        prevSuggestions.data.every(({ name }, index) => name === nextSuggestions.data[index].name)
+      prevSuggestions.data.every(({ name }, index) => name === nextSuggestions.data[index].name)
       : !!prevSuggestions === !!nextSuggestions;
   if (!suggestionsEqual) return false;
 
@@ -733,7 +733,7 @@ export type MessageInputProps<
   Me extends UnknownType = DefaultMessageType,
   Re extends UnknownType = DefaultReactionType,
   Us extends UnknownType = DefaultUserType,
-> = Partial<MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>>;
+  > = Partial<MessageInputPropsWithContext<At, Ch, Co, Ev, Me, Re, Us>>;
 
 /**
  * UI Component for message input
@@ -752,8 +752,8 @@ export const MessageInput = <
   Me extends UnknownType = DefaultMessageType,
   Re extends UnknownType = DefaultReactionType,
   Us extends UnknownType = DefaultUserType,
->(
-  props: MessageInputProps<At, Ch, Co, Ev, Me, Re, Us>,
+  >(
+    props: MessageInputProps<At, Ch, Co, Ev, Me, Re, Us>,
 ) => {
   const { disabled = false, members, watchers } = useChannelContext<At, Ch, Co, Ev, Me, Re, Us>();
 
