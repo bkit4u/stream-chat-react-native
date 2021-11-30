@@ -66,7 +66,7 @@ export const MentionsItem = <Us extends DefaultUserType = DefaultUserType>({
         </Text>
         <Text style={[styles.tag, { color: grey }, tag]}>{`@${id}`}</Text>
       </View>
-      <AtMentions pathFill={accent_blue} />
+      {/* <AtMentions pathFill={accent_blue} /> */}
     </View>
   );
 };
